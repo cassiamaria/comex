@@ -59,4 +59,7 @@ public class Pedido {
                 '}';
     }
 
+    public BigDecimal getValorTotal() {
+        return getPreco().multiply(new BigDecimal(getQuantidade()));
+    }
 }
