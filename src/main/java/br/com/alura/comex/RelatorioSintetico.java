@@ -8,7 +8,7 @@ import java.util.List;
 public class RelatorioSintetico {
     int totalDeProdutosVendidos;
     int totalDePedidosRealizados;
-    int totalDeCategorias;
+    long totalDeCategorias;
 
     BigDecimal montanteDeVendas = BigDecimal.ZERO;
 
@@ -23,8 +23,7 @@ public class RelatorioSintetico {
 
         this.totalDeProdutosVendidos = listaDePedidos.stream().mapToInt(Pedido::getQuantidade).sum();
         this.totalDePedidosRealizados = listaDePedidos.size();
-        listaDePedidos.forEach(pedido -> categoriasProcessadas.add(pedido.getCategoria()));
-        this.totalDeCategorias = categoriasProcessadas.size();
+        this.totalDeCategorias = listaDePedidos.stream().map(Pedido::getCategoria).distinct().count();
         this.montanteDeVendas = listaDePedidos.stream().map(Pedido::getValorTotal).reduce(BigDecimal.ZERO, BigDecimal::add);
         this.pedidoMaisBarato = listaDePedidos.stream()
                 .min(Comparator.comparing(Pedido::getValorTotal))
@@ -42,7 +41,7 @@ public class RelatorioSintetico {
         return totalDePedidosRealizados;
     }
 
-    public int getTotalDeCategorias() {
+    public long getTotalDeCategorias() {
         return totalDeCategorias;
     }
 
