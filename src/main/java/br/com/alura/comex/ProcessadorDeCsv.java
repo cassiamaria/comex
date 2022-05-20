@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class ProcessadorDeCsv {
     public List<Pedido> listarPedidos(String fileName) {
-        ArrayList<Pedido> pedidos = new ArrayList<>();
+        List<Pedido> pedidos = new ArrayList<>();
 
         try {
             URL recursoCSV = ClassLoader.getSystemResource("pedidos.csv");
