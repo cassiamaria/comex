@@ -1,8 +1,11 @@
 package br.com.alura.comex;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 public class RelatorioSintetico {
     int totalDeProdutosVendidos;
@@ -51,4 +54,24 @@ public class RelatorioSintetico {
     public Pedido getPedidoMaisCaro() {
         return pedidoMaisCaro;
     }
+
+    public void imprimirRelatorio() {
+        System.out.println("#### RELATÓRIO DE VALORES TOTAIS");
+        System.out.printf("- TOTAL DE PEDIDOS REALIZADOS: %s\n", getTotalDePedidosRealizados());
+        System.out.printf("- TOTAL DE PRODUTOS VENDIDOS: %s\n", getTotalDeProdutosVendidos());
+        System.out.printf("- TOTAL DE CATEGORIAS: %s\n", getTotalDeCategorias());
+        System.out.printf("- MONTANTE DE VENDAS: %s\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR"))
+                .format(getMontanteDeVendas().setScale(2, RoundingMode.HALF_DOWN)));
+        System.out.printf("- PEDIDO MAIS BARATO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR"))
+                        .format(getPedidoMaisBarato().getValorTotal().setScale(2, RoundingMode.HALF_DOWN)),
+                getPedidoMaisBarato().getProduto());
+        System.out.printf("- PEDIDO MAIS CARO: %s (%s)\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR"))
+                        .format(getPedidoMaisCaro().getValorTotal().setScale(2, RoundingMode.HALF_DOWN)),
+                getPedidoMaisCaro().getProduto());
+    }
+
+    public void exibir() {
+        imprimirRelatorio();
+    }
+
 }

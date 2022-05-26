@@ -1,4 +1,7 @@
-package br.com.alura.comex;
+package br.com.alura.comex.processadores;
+
+import br.com.alura.comex.Pedido;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -11,8 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ProcessadorDeCsv {
-    public List<Pedido> listarPedidos(String fileName) {
+public class ProcessadorDeCsv implements Processador {
+
+    @Override
+    public List<Pedido> imprimir() {
         List<Pedido> pedidos = new ArrayList<>();
 
         try {
