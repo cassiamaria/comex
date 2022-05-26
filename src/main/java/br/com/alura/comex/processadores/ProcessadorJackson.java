@@ -16,11 +16,11 @@ public abstract class ProcessadorJackson implements Processador {
     public abstract String getArquivo();
 
 
-    public List<Pedido> imprimir() throws URISyntaxException, IOException {
+    public List<Pedido> processa() throws URISyntaxException, IOException {
         URL recurso = ClassLoader.getSystemResource(getArquivo());
         FileReader reader = new FileReader(recurso.toURI().getPath());
         ObjectMapper objectMapper = getMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        return getMapper().readValue(reader, new TypeReference<List<Pedido>>(){});
+        return objectMapper.readValue(reader, new TypeReference<List<Pedido>>(){});
     }
 }

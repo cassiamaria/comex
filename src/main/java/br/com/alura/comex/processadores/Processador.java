@@ -5,5 +5,5 @@ import br.com.alura.comex.Pedido;
 import java.util.List;
 
 public interface Processador {
-    List<Pedido> imprimir() throws Exception;
+    List<Pedido> processa() throws Exception;
 }

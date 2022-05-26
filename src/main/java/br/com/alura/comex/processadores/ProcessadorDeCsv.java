@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class ProcessadorDeCsv implements Processador {
 
     @Override
-    public List<Pedido> imprimir() {
+    public List<Pedido> processa() {
         List<Pedido> pedidos = new ArrayList<>();
 
         try {

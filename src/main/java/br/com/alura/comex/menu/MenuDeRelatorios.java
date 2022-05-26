@@ -13,14 +13,14 @@ public class MenuDeRelatorios {
 
     public void imprimirProcessador() {
         System.out.println("Informe qual o tipo do arquivo você deseja imprimir (utilize letras maiúsculas): ");
-        System.out.println("CSV");
-        System.out.println("JSON");
-        System.out.println("XML");
+        System.out.println("1. CSV");
+        System.out.println("2. JSON");
+        System.out.println("3. XML");
     }
 
     private void relatorio(List<Pedido> listaDePedidos) {
         RelatorioSintetico relatorio = new RelatorioSintetico(listaDePedidos);
-        relatorio.exibir();
+        relatorio.imprimirRelatorio();
     }
 
     private List<Pedido> arquivo() throws Exception {
@@ -28,7 +28,7 @@ public class MenuDeRelatorios {
         String opcao = entrada.nextLine();
         TipoProcessador tipoProcessador = TipoProcessador.valueOf(opcao);
         Processador processador = tipoProcessador.getProcessador();
-        return processador.imprimir();
+        return processador.processa();
     }
 
     public void exibirRelatorio() throws Exception {

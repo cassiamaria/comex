@@ -13,7 +13,7 @@ import java.util.Locale;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        List<Pedido> pedidos = new ProcessadorDeCsv().imprimir();
+        List<Pedido> pedidos = new ProcessadorDeCsv().processa();
         RelatorioSintetico relatorioSintetico = new RelatorioSintetico(pedidos);
 
         MenuDeRelatorios menuDeRelatorios = new MenuDeRelatorios();
