@@ -17,7 +17,7 @@ public class ProcessadorDeCsv {
 
         try {
             URL recursoCSV = ClassLoader.getSystemResource("pedidos.csv");
-            Path caminhoDoArquivo = caminhoDoArquivo = Path.of(recursoCSV.toURI());
+            Path caminhoDoArquivo = Path.of(recursoCSV.toURI());
 
             Scanner leitorDeLinhas = new Scanner(caminhoDoArquivo);
 

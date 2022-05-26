@@ -10,8 +10,7 @@ import java.util.Locale;
 public class Main {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        ProcessadorDeCsv processadorDeCsv = new ProcessadorDeCsv();
-        List<Pedido> pedidos = processadorDeCsv.listarPedidos("pedidos.csv");
+        List<Pedido> pedidos = new ProcessadorDeCsv().listarPedidos("pedidos.csv");
         RelatorioSintetico relatorioSintetico = new RelatorioSintetico(pedidos);
 
         System.out.println("#### RELATÓRIO DE VALORES TOTAIS");

@@ -5,14 +5,14 @@ import java.time.LocalDate;
 
 public class Pedido {
 
-    private String categoria;
-    private String produto;
-    private String cliente;
+    private final String categoria;
+    private final String produto;
+    private final String cliente;
 
-    private BigDecimal preco;
-    private int quantidade;
+    private final BigDecimal preco;
+    private final int quantidade;
 
-    private LocalDate data;
+    private final LocalDate data;
 
     public Pedido(String categoria, String produto, String cliente, BigDecimal preco, int quantidade, LocalDate data) {
         this.categoria = categoria;
@@ -31,20 +31,12 @@ public class Pedido {
         return produto;
     }
 
-    public String getCliente() {
-        return cliente;
-    }
-
     public BigDecimal getPreco() {
         return preco;
     }
 
     public int getQuantidade() {
         return quantidade;
-    }
-
-    public LocalDate getData() {
-        return data;
     }
 
     @Override
@@ -56,7 +48,7 @@ public class Pedido {
                 ", preco=" + preco +
                 ", quantidade=" + quantidade +
                 ", data=" + data +
-                '}';
+                '}';    
     }
 
     public BigDecimal getValorTotal() {

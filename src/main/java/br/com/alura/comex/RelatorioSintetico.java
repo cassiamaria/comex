@@ -2,20 +2,15 @@ package br.com.alura.comex;
 
 import java.math.BigDecimal;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class RelatorioSintetico {
     int totalDeProdutosVendidos;
     int totalDePedidosRealizados;
     long totalDeCategorias;
-
     BigDecimal montanteDeVendas = BigDecimal.ZERO;
-
     Pedido pedidoMaisBarato;
     Pedido pedidoMaisCaro;
-
-    HashSet<String> categoriasProcessadas = new HashSet<String>();
 
     public RelatorioSintetico(List<Pedido> listaDePedidos) {
         if (listaDePedidos == null || listaDePedidos.isEmpty())
@@ -55,9 +50,5 @@ public class RelatorioSintetico {
 
     public Pedido getPedidoMaisCaro() {
         return pedidoMaisCaro;
-    }
-
-    public HashSet<String> getCategoriasProcessadas() {
-        return categoriasProcessadas;
     }
 }
