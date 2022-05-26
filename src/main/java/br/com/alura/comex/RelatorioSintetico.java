@@ -69,9 +69,4 @@ public class RelatorioSintetico {
                         .format(getPedidoMaisCaro().getValorTotal().setScale(2, RoundingMode.HALF_DOWN)),
                 getPedidoMaisCaro().getProduto());
     }
-
-    public void exibir() {
-        imprimirRelatorio();
-    }
-
 }

@@ -1,7 +1,6 @@
 package br.com.alura.comex.processadores;
 
 import br.com.alura.comex.Pedido;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.math.BigDecimal;
