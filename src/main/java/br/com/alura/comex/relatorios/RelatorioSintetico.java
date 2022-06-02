@@ -1,4 +1,6 @@
-package br.com.alura.comex;
+package br.com.alura.comex.relatorios;
+
+import br.com.alura.comex.Pedido;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -17,7 +19,7 @@ public class RelatorioSintetico {
 
     public RelatorioSintetico(List<Pedido> listaDePedidos) {
         if (listaDePedidos == null || listaDePedidos.isEmpty())
-            throw new IllegalArgumentException("A lista de pedidos está nula ou vazia!");
+            throw new IllegalArgumentException("A lista não deve estar vazia ou nula!");
 
         this.totalDeProdutosVendidos = listaDePedidos.stream().mapToInt(Pedido::getQuantidade).sum();
         this.totalDePedidosRealizados = listaDePedidos.size();
