@@ -2,9 +2,9 @@
 package br.com.alura.comex.menu;
 
 import br.com.alura.comex.Pedido;
-import br.com.alura.comex.RelatorioSintetico;
 import br.com.alura.comex.enums.TipoProcessador;
 import br.com.alura.comex.processadores.Processador;
+import br.com.alura.comex.relatorios.RelatorioSintetico;
 
 import java.util.List;
 import java.util.Scanner;
