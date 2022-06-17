@@ -58,7 +58,7 @@ public class Produto {
         return categoria;
     }
 
-    public void setName(String name) {
+    public void setNome(String name) {
         this.nome = name;
     }
 

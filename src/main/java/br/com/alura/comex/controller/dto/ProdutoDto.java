@@ -1,6 +1,7 @@
 package br.com.alura.comex.controller.dto;
 
 import br.com.alura.comex.entity.Produto;
+import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -46,7 +47,12 @@ public class ProdutoDto {
     public CategoriaDto getCategoria() {
         return categoria;
     }
+
     public static List<ProdutoDto> converter(List<Produto> produtos) {
         return produtos.stream().map(ProdutoDto::new).collect(Collectors.toList());
+    }
+
+    public static Page<ProdutoDto> converterPagina(Page<Produto> produtos) {
+        return produtos.map(ProdutoDto::new);
     }
 }
