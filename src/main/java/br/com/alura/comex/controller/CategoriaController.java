@@ -1,10 +1,12 @@
 package br.com.alura.comex.controller;
 
 import br.com.alura.comex.controller.dto.CategoriaDto;
+import br.com.alura.comex.controller.dto.projecao.PedidosPorCategoriaProjecao;
 import br.com.alura.comex.controller.form.AtualizacaoCategoriaForm;
 import br.com.alura.comex.controller.form.CategoriaForm;
 import br.com.alura.comex.entity.Categoria;
 import br.com.alura.comex.repository.CategoriaRepository;
+import br.com.alura.comex.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,9 @@ public class CategoriaController {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
     @GetMapping
     public List<CategoriaDto> listarTodos(){
         List<Categoria> categorias = categoriaRepository.findAll();
@@ -36,6 +41,13 @@ public class CategoriaController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/pedidos")
+    public ResponseEntity<List<PedidosPorCategoriaProjecao>> pedidosVendidosPorCategoria(){
+        List<PedidosPorCategoriaProjecao> pedidosPorCategoriaRelatorio = pedidoRepository.findPedidosPorCategoria();
+        return ResponseEntity.ok(pedidosPorCategoriaRelatorio);
+    }
+
 
     @PostMapping
     @Transactional
