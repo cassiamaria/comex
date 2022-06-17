@@ -1,5 +1,6 @@
 package br.com.alura.comex.controller;
 
+import br.com.alura.comex.controller.dto.DetalhesPedidoDto;
 import br.com.alura.comex.controller.dto.PedidoDto;
 import br.com.alura.comex.entity.Pedido;
 import br.com.alura.comex.repository.ClienteRepository;
@@ -12,7 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Optional;
 
 public class PedidoController {
     @Autowired
@@ -31,5 +35,14 @@ public class PedidoController {
         Page<PedidoDto> paginaPedidos = PedidoDto.converter(pedidos);
 
         return ResponseEntity.ok().body(paginaPedidos);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DetalhesPedidoDto> buscarPedidoPorId(@PathVariable Long id){
+        Optional<Pedido> optionalPedido= pedidoRepository.findById(id);
+        if (optionalPedido.isPresent()){
+            return ResponseEntity.ok().body(new DetalhesPedidoDto(optionalPedido.get()));
+        }
+        return ResponseEntity.notFound().build();
     }
 }

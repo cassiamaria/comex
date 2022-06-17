@@ -3,6 +3,7 @@ package br.com.alura.comex.entity;
 import br.com.alura.comex.entity.enuns.TipoDesconto;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
 @Entity
@@ -29,7 +30,7 @@ public class ItemDePedido {
     @Enumerated(EnumType.STRING)
     private TipoDesconto tipoDesconto;
 
-    public ItemDePedido(){
+    public ItemDePedido(@Min(1) int quantidadeProduto, Produto produto){
         super();
     }
 
