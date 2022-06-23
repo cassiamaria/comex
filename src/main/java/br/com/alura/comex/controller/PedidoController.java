@@ -2,7 +2,7 @@ package br.com.alura.comex.controller;
 
 import br.com.alura.comex.controller.dto.DetalhesPedidoDto;
 import br.com.alura.comex.controller.dto.PedidoDto;
-import br.com.alura.comex.entity.Pedido;
+import br.com.alura.comex.model.Pedido;
 import br.com.alura.comex.repository.ClienteRepository;
 import br.com.alura.comex.repository.PedidoRepository;
 import br.com.alura.comex.repository.ProdutoRepository;

@@ -1,4 +1,4 @@
-package br.com.alura.comex.entity;
+package br.com.alura.comex.model;
 
 
 import javax.persistence.*;
@@ -26,6 +26,9 @@ public class Cliente {
 
     @OneToMany(mappedBy = "id")
     private List<Pedido> pedidos = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Usuario usuario;
 
     public Cliente() {
         super();

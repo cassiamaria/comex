@@ -4,7 +4,7 @@ import br.com.alura.comex.controller.dto.CategoriaDto;
 import br.com.alura.comex.controller.dto.projecao.PedidosPorCategoriaProjecao;
 import br.com.alura.comex.controller.form.AtualizacaoCategoriaForm;
 import br.com.alura.comex.controller.form.CategoriaForm;
-import br.com.alura.comex.entity.Categoria;
+import br.com.alura.comex.model.Categoria;
 import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,6 @@ public class CategoriaController {
         List<PedidosPorCategoriaProjecao> pedidosPorCategoriaRelatorio = pedidoRepository.findPedidosPorCategoria();
         return ResponseEntity.ok(pedidosPorCategoriaRelatorio);
     }
-
 
     @PostMapping
     @Transactional

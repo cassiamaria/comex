@@ -1,6 +1,6 @@
 package br.com.alura.comex.controller.form;
 
-import br.com.alura.comex.entity.Produto;
+import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
 

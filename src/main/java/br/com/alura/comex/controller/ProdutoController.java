@@ -3,10 +3,8 @@ package br.com.alura.comex.controller;
 import br.com.alura.comex.controller.dto.ProdutoDto;
 import br.com.alura.comex.controller.form.AtualizarProdutoForm;
 import br.com.alura.comex.controller.form.ProdutoForm;
-import br.com.alura.comex.entity.Produto;
+import br.com.alura.comex.model.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
-import br.com.alura.comex.repository.ClienteRepository;
-import br.com.alura.comex.repository.PedidoRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

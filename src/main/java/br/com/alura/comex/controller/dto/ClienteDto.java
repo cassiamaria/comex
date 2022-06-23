@@ -1,6 +1,6 @@
 package br.com.alura.comex.controller.dto;
 
-import br.com.alura.comex.entity.Cliente;
+import br.com.alura.comex.model.Cliente;
 
 import java.util.List;
 import java.util.stream.Collectors;
