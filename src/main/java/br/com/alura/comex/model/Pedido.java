@@ -4,6 +4,7 @@ package br.com.alura.comex.model;
 import br.com.alura.comex.model.enuns.TipoDesconto;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,19 +19,23 @@ public class Pedido {
 
     private LocalDate data = LocalDate.now();
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Valid
     private Cliente cliente;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @Valid
     private List<ItemDePedido> itens = new ArrayList<>();
 
-    private BigDecimal desconto;
+    private BigDecimal desconto = BigDecimal.ZERO;
 
     @Enumerated(EnumType.STRING)
     private TipoDesconto tipoDesconto = TipoDesconto.NENHUM;
 
-    public Pedido() {
-        super();
+    public Pedido() {}
+
+    public Pedido(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public void adicionarItem(ItemDePedido item) {
@@ -50,7 +55,8 @@ public class Pedido {
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
                 .subtract(this.getValorTotalDescontos());
     }
-    public BigDecimal getValorTotalDescontos(){
+
+    public BigDecimal getValorTotalDescontos() {
         return this.itens.stream()
                 .map(ItemDePedido::getDesconto)
                 .reduce(BigDecimal.ZERO, BigDecimal::add)
@@ -103,5 +109,17 @@ public class Pedido {
 
     public void setTipoDesconto(TipoDesconto tipoDesconto) {
         this.tipoDesconto = tipoDesconto;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", data=" + data +
+                ", cliente=" + cliente +
+                ", itens=" + itens +
+                ", desconto=" + desconto +
+                ", tipoDesconto=" + tipoDesconto +
+                '}';
     }
 }

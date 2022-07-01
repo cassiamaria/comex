@@ -1,6 +1,7 @@
 package br.com.alura.comex.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
 @Entity
@@ -9,30 +10,33 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(nullable = false)
     private String nome;
+
     private String descricao;
 
     @Column(name = "preco_unitario", nullable = false)
     private BigDecimal precoUnitario;
 
     @Column(name = "quantidade_estoque", nullable = false)
+    @Min(0)
     private int quantidadeEstoque;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Categoria categoria;
 
     public Produto(){
-        super();
+        //super();
     }
-    public Produto(String name, String descricao, BigDecimal precoUnitario, int quantidadeEstoque, Categoria categoria) {
-        this.nome = name;
+
+    public Produto(String nome, String descricao, BigDecimal precoUnitario, int quantidadeEstoque, Categoria categoria) {
+        this.nome = nome;
         this.descricao = descricao;
         this.precoUnitario = precoUnitario;
         this.quantidadeEstoque = quantidadeEstoque;
         this.categoria = categoria;
     }
-
 
     public Long getId() {
         return id;
@@ -58,8 +62,8 @@ public class Produto {
         return categoria;
     }
 
-    public void setNome(String name) {
-        this.nome = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public void setDescricao(String descricao) {
@@ -82,12 +86,11 @@ public class Produto {
     public String toString() {
         return "Produto{" +
                 "id=" + id +
-                ", name='" + nome + '\'' +
+                ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", precoUnitario=" + precoUnitario +
                 ", quantidadeEstoque=" + quantidadeEstoque +
                 ", categoria=" + categoria +
                 '}';
     }
-
 }

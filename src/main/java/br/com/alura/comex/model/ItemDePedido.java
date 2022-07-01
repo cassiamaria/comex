@@ -1,6 +1,7 @@
 package br.com.alura.comex.model;
 
 import br.com.alura.comex.model.enuns.TipoDesconto;
+import br.com.alura.comex.model.enuns.TipoDescontoItem;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -9,7 +10,6 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "itens_pedido")
 public class ItemDePedido {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,24 +26,22 @@ public class ItemDePedido {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Produto produto;
 
-    private BigDecimal desconto;
+    @Column(nullable = false)
+    private BigDecimal desconto = BigDecimal.ZERO;
     @Enumerated(EnumType.STRING)
-    private TipoDesconto tipoDesconto;
+    private TipoDescontoItem tipoDesconto = TipoDescontoItem.NENHUM;
 
-    public ItemDePedido(@Min(1) int quantidadeProduto, Produto produto){
+    public ItemDePedido() {
         super();
     }
 
-    public ItemDePedido(Integer quantidade, Pedido pedido, Produto produto, BigDecimal desconto, TipoDesconto tipoDesconto) {;
+    public ItemDePedido(Integer quantidade, Produto produto) {
         this.quantidade = quantidade;
-        this.pedido = pedido;
         this.produto = produto;
         this.precoUnitario = produto.getPrecoUnitario();
-        this.desconto = desconto;
-        this.tipoDesconto = tipoDesconto;
     }
 
-    public BigDecimal getValorTotalItem(){
+    public BigDecimal getValorTotalItem() {
         return this.precoUnitario.multiply(new BigDecimal(this.quantidade));
     }
 
@@ -71,11 +69,19 @@ public class ItemDePedido {
         return desconto;
     }
 
-    public TipoDesconto getTipoDesconto() {
+    public TipoDescontoItem getTipoDesconto() {
         return tipoDesconto;
     }
 
     public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
+    public void setDesconto(BigDecimal desconto) {
+        this.desconto = desconto;
+    }
+
+    public void setTipoDesconto(TipoDescontoItem tipoDesconto) {
+        this.tipoDesconto = tipoDesconto;
+    }
 }

@@ -22,4 +22,45 @@ public class ItemDePedidoDto {
         this.desconto = item.getDesconto();
         this.valorFinal = item.getValorTotalItem();
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public BigDecimal getPrecoUnitario() {
+        return precoUnitario;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public String getProduto() {
+        return produto;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public BigDecimal getDesconto() {
+        return desconto;
+    }
+
+    public BigDecimal getValorFinal() {
+        return valorFinal;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemDePedidoDto{" +
+                "id=" + id +
+                ", precoUnitario=" + precoUnitario +
+                ", quantidade=" + quantidade +
+                ", produto='" + produto + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", desconto=" + desconto +
+                ", valorFinal=" + valorFinal +
+                '}';
+    }
 }

@@ -16,6 +16,23 @@ public class ResumoClienteDto {
         this.local = cliente.getEndereco().getCidade() + "/" + cliente.getEndereco().getEstado();
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public Long getCpf() {
+        return cpf;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+
     public static Page<ResumoClienteDto> converter(Page<Cliente> clientes) {
         return clientes.map(ResumoClienteDto::new);
     }

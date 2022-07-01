@@ -28,7 +28,44 @@ public class ClienteDto {
         this.estado = cliente.getEndereco().getEstado();
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public Long getCpf() {
+        return cpf;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getRua() {
+        return rua;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
     public static List<ClienteDto> converter(List<Cliente> clientes) {
         return clientes.stream().map(ClienteDto::new).collect(Collectors.toList());
     }
+
 }

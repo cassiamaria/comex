@@ -7,24 +7,21 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DetalhesPedidoDto {
+public class DetalhamentoPedidoDto {
     private LocalDate data;
     private BigDecimal valorTotal;
     private BigDecimal desconto;
-    private int quantidadeProdutos;
+    private List<ItemDePedidoDto> itens;
     private Long idCliente;
     private String nomeCliente;
-    private List<ItemDePedidoDto> itens;
 
-
-    public DetalhesPedidoDto(Pedido pedido) {
+    public DetalhamentoPedidoDto(Pedido pedido) {
         this.data = pedido.getData();
         this.valorTotal = pedido.getValorTotalPedido();
         this.desconto = pedido.getDesconto();
-        this.quantidadeProdutos = pedido.getQuantidadeDeProdutos();
+        this.itens = pedido.getItens().stream().map(ItemDePedidoDto::new).collect(Collectors.toList());
         this.idCliente = pedido.getCliente().getId();
         nomeCliente = pedido.getCliente().getNome();
-        this.itens = pedido.getItens().stream().map(ItemDePedidoDto::new).collect(Collectors.toList());
     }
 
     public LocalDate getData() {
@@ -39,8 +36,8 @@ public class DetalhesPedidoDto {
         return desconto;
     }
 
-    public int getQuantidadeProdutos() {
-        return quantidadeProdutos;
+    public List<ItemDePedidoDto> getItens() {
+        return itens;
     }
 
     public Long getIdCliente() {
@@ -49,9 +46,5 @@ public class DetalhesPedidoDto {
 
     public String getNomeCliente() {
         return nomeCliente;
-    }
-
-    public List<ItemDePedidoDto> getItens() {
-        return itens;
     }
 }

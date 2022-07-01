@@ -20,17 +20,35 @@ public class ItemDePedidoForm {
 
     public ItemDePedidoForm() {}
 
-    private Produto validar(ProdutoRepository produtoRepository){
+    private Produto verificarProduto(ProdutoRepository produtoRepository){
         Optional<Produto> produto = produtoRepository.findById(this.idProduto);
         if (produto.get().getQuantidadeEstoque() < this.quantidadeProduto){
-            throw new RuntimeException("O produto não tem estoque!");
+            throw new RuntimeException("Sem produto em estoque");
         }
 
-        produto.get().setQuantidadeEstoque(produto.get().getQuantidadeEstoque() - this.quantidadeProduto);
+        produto.get().setQuantidadeEstoque(
+                produto.get().getQuantidadeEstoque() - this.quantidadeProduto
+        );
         return produto.get();
     }
 
     public ItemDePedido converter(ProdutoRepository produtoRepository){
-        return new ItemDePedido(this.quantidadeProduto, validar(produtoRepository));
+        return new ItemDePedido(this.quantidadeProduto, verificarProduto(produtoRepository));
+    }
+
+    public Long getIdProduto() {
+        return idProduto;
+    }
+
+    public int getQuantidadeProduto() {
+        return quantidadeProduto;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemDePedidoForm{" +
+                "idProduto=" + idProduto +
+                ", quantidadeProduto=" + quantidadeProduto +
+                '}';
     }
 }

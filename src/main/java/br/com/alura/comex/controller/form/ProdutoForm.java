@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 public class ProdutoForm {
-
     @NotNull
     @NotEmpty
     @Size(min = 2)
@@ -18,14 +17,14 @@ public class ProdutoForm {
     private String descricao;
 
     @NotNull
-    @Positive
+    @DecimalMin(value = "0.0", inclusive = false)
     private BigDecimal precoUnitario;
 
     @NotNull
     private int quantidadeEstoque;
 
     @NotNull
-    private Long categoriaId;
+    private Long categoria;
 
     public String getNome() {
         return nome;
@@ -43,12 +42,23 @@ public class ProdutoForm {
         return quantidadeEstoque;
     }
 
-    public Long getCategoriaId() {
-        return categoriaId;
+    public Long getCategoria() {
+        return categoria;
     }
 
     public Produto converter(CategoriaRepository categoriaRepository) {
-        Optional<Categoria> categoria = categoriaRepository.findById(categoriaId);
-        return new Produto(nome, descricao, precoUnitario, quantidadeEstoque, categoria.get());
+        Optional<Categoria> novaCategoria = categoriaRepository.findById(categoria);
+        return new Produto(nome, descricao, precoUnitario, quantidadeEstoque, novaCategoria.get());
+    }
+
+    @Override
+    public String toString() {
+        return "ProdutoForm{" +
+                "nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", precoUnitario=" + precoUnitario +
+                ", quantidadeEstoque=" + quantidadeEstoque +
+                ", categoria='" + categoria + '\'' +
+                '}';
     }
 }

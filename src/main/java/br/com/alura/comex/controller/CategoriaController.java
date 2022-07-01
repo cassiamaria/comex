@@ -1,13 +1,15 @@
 package br.com.alura.comex.controller;
 
 import br.com.alura.comex.controller.dto.CategoriaDto;
-import br.com.alura.comex.controller.dto.projecao.PedidosPorCategoriaProjecao;
+import br.com.alura.comex.controller.dto.DetalhesCategoriaDto;
+import br.com.alura.comex.model.projecao.PedidosPorCategoriaProjecao;
 import br.com.alura.comex.controller.form.AtualizacaoCategoriaForm;
 import br.com.alura.comex.controller.form.CategoriaForm;
 import br.com.alura.comex.model.Categoria;
 import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -34,15 +36,16 @@ public class CategoriaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoriaDto> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<DetalhesCategoriaDto> buscarCategoriaPorId(@PathVariable Long id) {
         Optional<Categoria> categoria = categoriaRepository.findById(id);
         if (categoria.isPresent()) {
-            return ResponseEntity.ok(new CategoriaDto(categoria.get()));
+            return ResponseEntity.ok().body(new DetalhesCategoriaDto(categoria.get()));
         }
         return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/pedidos")
+    @Cacheable(value = "pedidosPorCategoria")
     public ResponseEntity<List<PedidosPorCategoriaProjecao>> pedidosVendidosPorCategoria(){
         List<PedidosPorCategoriaProjecao> pedidosPorCategoriaRelatorio = pedidoRepository.findPedidosPorCategoria();
         return ResponseEntity.ok(pedidosPorCategoriaRelatorio);
