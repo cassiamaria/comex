@@ -24,18 +24,6 @@ public class AtualizacaoCategoriaForm {
         return categoria.get();
     }
 
-    /*public Categoria atualizarStatus(Categoria categoria){
-        Categoria categoriaAtualizada = categoria;
-
-        if (categoriaAtualizada.getStatus().equals(StatusCategoria.ATIVA)){
-            this.status = StatusCategoria.INATIVA;
-            categoriaAtualizada.setStatus(this.status);
-        }
-
-        categoriaAtualizada.setStatus(this.status);
-        return categoriaAtualizada;
-    }*/
-
     public String getNome() {
         return nome;
     }
