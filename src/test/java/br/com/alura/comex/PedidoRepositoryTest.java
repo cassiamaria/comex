@@ -27,7 +27,7 @@ public class PedidoRepositoryTest {
     private TestEntityManager em;
 
     @Test
-    public void deveriaRetornarUmRegistroParaCadaCategoria() {
+    public void deveRetornarUmRegistroParaCadaCategoria() {
         List<PedidosPorCategoriaProjecao> resultado = repository.findPedidosPorCategoria();
 
         assertThat(resultado)
@@ -36,8 +36,8 @@ public class PedidoRepositoryTest {
                         PedidosPorCategoriaProjecao::getQuantidadeProdutos,
                         PedidosPorCategoriaProjecao::getMontanteVendido)
                 .containsExactly(
-                        tuple(("JOGOS"), (7L), new BigDecimal("213.50")),
-                        tuple(("FILMES"), (2L), new BigDecimal("60.00"))
+                        tuple(("JOGOS"), (2L), new BigDecimal("800.00")),
+                        tuple(("FILMES"), (1L), new BigDecimal("20.00"))
                 );
     }
 }

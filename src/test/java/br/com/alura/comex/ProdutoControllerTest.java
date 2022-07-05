@@ -25,7 +25,7 @@ public class ProdutoControllerTest {
     @Test
     public void deveCadastrarUmProduto() throws Exception {
         URI uri = new URI("/api/produtos");
-        JSONObject json = criarObjetoJson();
+        JSONObject json = criaObjetoJson();
         String request = json.toString();
 
         mockMvc
@@ -38,7 +38,7 @@ public class ProdutoControllerTest {
                         .is(201));
     }
 
-    private JSONObject criarObjetoJson() throws JSONException {
+    private JSONObject criaObjetoJson() throws JSONException {
         return new JSONObject()
                 .put("nome","Jogo")
                 .put("descricao", "The last of us")
