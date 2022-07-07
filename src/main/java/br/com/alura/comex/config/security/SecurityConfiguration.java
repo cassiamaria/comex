@@ -19,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 
 @Configuration
-@Profile("dev")
+@Profile("prod")
 public class SecurityConfiguration {
     @Autowired
     private AuthenticationService autenticacaoService;

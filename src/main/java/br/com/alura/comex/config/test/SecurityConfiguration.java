@@ -1,4 +1,4 @@
-package br.com.alura.comex.config.dev;
+package br.com.alura.comex.config.test;
 
 import br.com.alura.comex.config.security.AuthenticationService;
 import br.com.alura.comex.config.security.TokenService;
@@ -16,8 +16,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 @Configuration
-@Profile("dev")
+@Profile("test")
 public class SecurityConfiguration {
     @Autowired
     private AuthenticationService autenticacaoService;
@@ -25,6 +26,7 @@ public class SecurityConfiguration {
     @Autowired
     private TokenService tokenService;
 
+    @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Bean
@@ -38,9 +40,9 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authorizedRequests -> authorizedRequests
-                                .antMatchers( "/**").permitAll()
-                                .anyRequest().authenticated())
-                                .csrf().disable();
+                        .antMatchers( "/**").permitAll()
+                        .anyRequest().authenticated())
+                .csrf().disable();
         return http.build();
     }
 

@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ActiveProfiles("test")
+
 class CategoriaRepositoryTest {
     @Autowired
     private CategoriaRepository repository;

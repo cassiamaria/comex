@@ -58,7 +58,7 @@ public class ProdutoControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").isNotEmpty())
-                .andExpect(jsonPath("$.content[0].nome").value("Filme"));
+                .andExpect(jsonPath("$.content[0].nome").value("Jogo"));
     }
 
     @Test
