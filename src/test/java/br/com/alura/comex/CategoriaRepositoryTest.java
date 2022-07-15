@@ -1,12 +1,12 @@
 package br.com.alura.comex;
 
-import br.com.alura.comex.model.Categoria;
-import br.com.alura.comex.repository.CategoriaRepository;
+import br.com.alura.comex.domain.Categoria;
+import br.com.alura.comex.application.repository.CategoriaRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Optional;
