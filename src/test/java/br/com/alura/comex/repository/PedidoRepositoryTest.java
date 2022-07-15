@@ -1,4 +1,4 @@
-package br.com.alura.comex;
+package br.com.alura.comex.repository;
 
 import br.com.alura.comex.application.model.projecao.PedidosPorCategoriaProjecao;
 import br.com.alura.comex.application.repository.PedidoRepository;

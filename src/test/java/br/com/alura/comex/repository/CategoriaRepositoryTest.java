@@ -1,4 +1,4 @@
-package br.com.alura.comex;
+package br.com.alura.comex.repository;
 
 import br.com.alura.comex.domain.Categoria;
 import br.com.alura.comex.application.repository.CategoriaRepository;

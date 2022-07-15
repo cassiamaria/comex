@@ -1,4 +1,4 @@
-package br.com.alura.comex;
+package br.com.alura.comex.controller;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,33 +10,28 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.net.URI;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@AutoConfigureMockMvc
 @SpringBootTest
+@AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class ProdutoControllerTest {
+class CategoriaControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     private JSONObject criaObjetoJson() throws JSONException {
         return new JSONObject()
-                .put("nome","Jogo")
-                .put("descricao", "The last of us")
-                .put("precoUnitario",400.00)
-                .put("quantidadeEstoque", 2)
-                .put("categoria", 2);
+                .put("nome","INFORMÁTICA");
     }
 
     @Test
-    public void deveCadastrarProduto() throws Exception {
-        URI uri = new URI("/api/produtos");
+    public void deveCriarCategoria() throws Exception {
+        URI uri = new URI("/api/categorias");
         JSONObject json = criaObjetoJson();
         String request = json.toString();
 
@@ -44,38 +39,57 @@ public class ProdutoControllerTest {
                 .perform(MockMvcRequestBuilders
                         .post(uri)
                         .content(request)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers
-                        .status().is(201));
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isCreated());
     }
 
     @Test
-    public void deveListarTodosProdutos() throws Exception {
-        URI uri = new URI("/api/produtos");
+    public void deveListarTodasCategorias() throws Exception {
+        URI uri = new URI("/api/categorias");
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get(uri)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").isNotEmpty())
-                .andExpect(jsonPath("$.content[0].nome").value("Jogo"));
+                        .andExpect(status().isOk())
+                        .andExpect(jsonPath("$.length()").isNotEmpty())
+                        .andExpect(jsonPath("$[0].nome").value("JOGOS"))
+                        .andExpect(jsonPath("$[1].nome").value("FILMES"))
+                        .andExpect(jsonPath("$[2].nome").value("INFORMÁTICA"));
+
     }
 
     @Test
-    public void devePesquisarProdutoPorId() throws Exception {
-        URI uri = new URI("/api/produtos/" + 1);
+    public void devePesquisarCategoriasPorId() throws Exception {
+        URI uri = new URI("/api/categorias/" + 1);
 
         mockMvc
                 .perform(MockMvcRequestBuilders
                         .get(uri)
-                        .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nome").value("The last of us"));
+                .andExpect(jsonPath("$.nome").value("JOGOS"))
+                .andExpect(jsonPath("$.status").value("ATIVA"));
+    }
+
+
+    @Test
+    public void deveListarPedidosPorCategoria() throws Exception {
+        URI uri = new URI("/api/categorias/pedidos");
+
+        mockMvc
+                .perform(MockMvcRequestBuilders
+                        .get(uri)
+                        .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().is(200))
+                .andReturn();
     }
 
     @Test
     public void deveRetornar404PorIdNaoExistente() throws Exception {
-        URI uri = new URI("/api/produtos/" + 404);
+        URI uri = new URI("/api/categorias/" + 404);
 
         mockMvc
                 .perform(MockMvcRequestBuilders

@@ -1,4 +1,4 @@
-package br.com.alura.comex;
+package br.com.alura.comex.controller;
 
 import org.json.JSONException;
 import org.json.JSONObject;
