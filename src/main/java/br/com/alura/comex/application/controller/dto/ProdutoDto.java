@@ -1,12 +1,15 @@
 package br.com.alura.comex.application.controller.dto;
 
+import br.com.alura.comex.domain.Dimensoes;
 import br.com.alura.comex.domain.Produto;
+import lombok.Data;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Data
 public class ProdutoDto {
     private Long id;
     private String nome;
@@ -14,6 +17,7 @@ public class ProdutoDto {
     private BigDecimal precoUnitario;
     private int quantidadeEstoque;
     private CategoriaDto categoria;
+    private Dimensoes dimensoes;
 
     public ProdutoDto(Produto produto) {
         this.id = produto.getId();
@@ -22,30 +26,7 @@ public class ProdutoDto {
         this.precoUnitario = produto.getPrecoUnitario();
         this.quantidadeEstoque = produto.getQuantidadeEstoque();
         this.categoria = new CategoriaDto(produto.getCategoria());
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public BigDecimal getPrecoUnitario() {
-        return precoUnitario;
-    }
-
-    public int getQuantidadeEstoque() {
-        return quantidadeEstoque;
-    }
-
-    public CategoriaDto getCategoria() {
-        return categoria;
+        this.dimensoes = produto.getDimensoes();
     }
 
     public static List<ProdutoDto> converter(List<Produto> produtos) {

@@ -1,13 +1,21 @@
 package br.com.alura.comex.application.controller.form;
 
 import br.com.alura.comex.domain.Categoria;
+import br.com.alura.comex.domain.Dimensoes;
 import br.com.alura.comex.domain.Produto;
 import br.com.alura.comex.application.repository.CategoriaRepository;
+import br.com.alura.comex.domain.factory.DimensoesBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProdutoForm {
     @NotNull
     @NotEmpty
@@ -26,39 +34,21 @@ public class ProdutoForm {
     @NotNull
     private Long categoria;
 
-    public String getNome() {
-        return nome;
-    }
+    @NotNull
+    private Double altura;
 
-    public String getDescricao() {
-        return descricao;
-    }
+    @NotNull
+    private Double comprimento;
 
-    public BigDecimal getPrecoUnitario() {
-        return precoUnitario;
-    }
+    @NotNull
+    private Double peso;
 
-    public int getQuantidadeEstoque() {
-        return quantidadeEstoque;
-    }
-
-    public Long getCategoria() {
-        return categoria;
-    }
+    @NotNull
+    private Double largura;
 
     public Produto converter(CategoriaRepository categoriaRepository) {
         Optional<Categoria> novaCategoria = categoriaRepository.findById(categoria);
-        return new Produto(nome, descricao, precoUnitario, quantidadeEstoque, novaCategoria.get());
-    }
-
-    @Override
-    public String toString() {
-        return "ProdutoForm{" +
-                "nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", precoUnitario=" + precoUnitario +
-                ", quantidadeEstoque=" + quantidadeEstoque +
-                ", categoria='" + categoria + '\'' +
-                '}';
+        Dimensoes dimensoes = new DimensoesBuilder().comAltura(altura).comComprimento(comprimento).comPeso(peso).comLargura(largura).build();
+        return new Produto(nome, descricao, precoUnitario, quantidadeEstoque, novaCategoria.get(), dimensoes);
     }
 }
